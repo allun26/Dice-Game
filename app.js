@@ -10,9 +10,9 @@ GAME RULES:
 */
 
 
-let scores, roundScore, activePlayer, gamePlaying;
+let scores, roundScore, activePlayer, gamePlaying, two6;
 //calls function to initialize the game
-init();
+window.addEventListener('load', init);
 
 // event to roll the dice when a player clicks on the roll dice button
 document.querySelector('.btn-roll').addEventListener('click', function(){
@@ -20,19 +20,27 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     
         //creates random number
         let dice = Math.floor(Math.random() * 6 ) + 1;
-
-        //display the result
-        let diceDOM = document.querySelector('.dice');
-        diceDOM.style.display = 'block';
-        diceDOM.src = 'dice-' + dice + '.png';
-        //adds current score if dice is not 1, and change turn and reset current score if dice is 1
-        if(dice !== 1){
-            roundScore += dice;
-            document.querySelector('#current-' + activePlayer).textContent = roundScore;
-        } else {
-            //next Player
-            nextPlayer();
-        }
+        console.log(dice);
+        
+            if (two6 === 6 && dice === 6){
+                scores[activePlayer] = 0;
+                document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+                nextPlayer();
+            }else {
+                //display the result
+                let diceDOM = document.querySelector('.dice');
+                diceDOM.style.display = 'block';
+                diceDOM.src = 'dice-' + dice + '.png';
+                //adds current score if dice is not 1, and change turn and reset current score if dice is 1
+                if(dice !== 1){
+                    two6 = dice;
+                    roundScore += dice;
+                    document.querySelector('#current-' + activePlayer).textContent = roundScore;
+                } else {
+                    //next Player
+                    nextPlayer();
+                }
+            }   
     }
 });
 
@@ -80,6 +88,7 @@ function init() {
     roundScore = 0;
     activePlayer = 0;
     gamePlaying = true;
+    two6 = 0;
 
     document.querySelector('.dice').style.display = 'none';
 
