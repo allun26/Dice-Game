@@ -20,7 +20,7 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
     
         //creates random number
         let dice = Math.floor(Math.random() * 6 ) + 1;
-        console.log(dice);
+        
         
             if (two6 === 6 && dice === 6){
                 scores[activePlayer] = 0;
@@ -51,8 +51,20 @@ document.querySelector('.btn-hold').addEventListener('click', function(){
         scores[activePlayer] += roundScore;
         //update ui
         document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+        
+        //the player is able to choose the final score
+        let scoreInput;
+        let winnerScore;
+        scoreInput = document.querySelector('.scoreInput').value;
+        
+        if(scoreInput){
+            winnerScore = scoreInput;
+        } else{
+            winnerScore = 100;
+        }
+        
         //check if player won the game
-        if (scores[activePlayer] >= 100) {
+        if (scores[activePlayer] >= winnerScore) {
             document.querySelector('#name-' + activePlayer).textContent = 'Winner!';
             document.querySelector('.dice').style.display = 'none';
             document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
