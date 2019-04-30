@@ -30,7 +30,7 @@ document.querySelector('.btn-roll').addEventListener('click', function(){
                 //display the result
                 let diceDOM = document.querySelector('.dice');
                 diceDOM.style.display = 'block';
-                diceDOM.src = 'dice-' + dice + '.png';
+                diceDOM.src = 'Images/dice-' + dice + '.png';
                 //adds current score if dice is not 1, and change turn and reset current score if dice is 1
                 if(dice !== 1){
                     two6 = dice;
